@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>สวนดอกไม้มีชีวิต 花园词汇 – ม.6</title>
+<style>
+:root{--ink:#1f2a2b;--paper:#f1f4ee;--seal:#b3302a;--jade:#2f7d6b;--card:#fffdf7}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Sarabun","Noto Sans Thai","Leelawadee UI",sans-serif;line-height:1.5}
+.cn{font-family:"Noto Serif SC","Songti SC","SimSun","Microsoft YaHei",serif}
+header{max-width:1000px;margin:0 auto;padding:14px 16px 6px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.seal{background:var(--jade);color:#fff;font-size:28px;width:54px;height:54px;display:grid;place-items:center;border-radius:50%;flex:none}
+h1{font-size:1.25rem;margin:0}
+header p{margin:0;font-size:.9rem;opacity:.8}
+.stats{margin-left:auto;display:flex;gap:8px;font-size:.9rem;flex-wrap:wrap}
+.stats span{background:var(--card);border:1px solid #cdd6cf;border-radius:20px;padding:2px 12px}
+main{max-width:1000px;margin:0 auto;padding:0 16px 24px}
+#scene{width:100%;height:auto;display:block;border-radius:10px;border:2px solid var(--ink);background:#d8ecf5;touch-action:none}
+.zone .ring{fill:rgba(255,255,255,.6);stroke:var(--seal);stroke-width:2.5;stroke-dasharray:6 5}
+.zone.over .ring{fill:rgba(255,230,150,.9);stroke-width:4}
+.zone .q{font-size:26px;fill:var(--seal);text-anchor:middle;font-weight:700}
+.zone.done .ring{fill:var(--card);stroke:var(--jade);stroke-dasharray:none}
+.zone.shake{animation:sh .35s}
+@keyframes sh{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.tray{margin-top:12px;background:var(--card);border:1px solid #cdd6cf;border-radius:10px;padding:10px 12px}
+.tray h2{font-size:.95rem;margin:0 0 8px;font-weight:600}
+#chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{min-width:72px;padding:6px 10px;display:flex;flex-direction:column;align-items:center;background:#fff;border:2px solid var(--ink);border-radius:8px;cursor:grab;user-select:none;touch-action:none;box-shadow:0 3px 0 var(--ink)}
+.chip b{font-size:26px;font-weight:600;line-height:1.2}
+.chip small{font-size:11px;font-family:sans-serif;color:var(--jade);display:none;line-height:1.2}
+body.py .chip .p,body.th .chip .t{display:block}
+.chip.ghost{position:fixed;z-index:99;pointer-events:none;transform:translate(-50%,-50%) scale(1.12);box-shadow:0 8px 16px rgba(0,0,0,.3)}
+.chip.used{visibility:hidden}
+.bar{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;align-items:center}
+button{font:inherit;background:var(--ink);color:#fff;border:0;border-radius:6px;padding:6px 14px;cursor:pointer}
+button.alt{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+#msg{flex:1;min-width:220px;font-size:.95rem;min-height:1.5em}
+#msg.ok{color:var(--jade)}#msg.no{color:var(--seal)}
+#log{margin-top:12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:8px}
+.note{background:var(--card);border-left:5px solid var(--jade);padding:6px 10px;border-radius:4px;font-size:.88rem}
+.note b.cn{font-size:1.2rem;margin-right:4px}.note em{color:#6a4b00;font-style:normal;display:block}
+#end{position:fixed;inset:0;background:rgba(20,30,28,.6);display:none;place-items:center;padding:16px;z-index:100}
+#end.show{display:grid}
+#end div{background:var(--card);border-radius:12px;padding:22px;max-width:420px;text-align:center}
+#end h2{margin:0 0 6px}
+@media(max-width:600px){.chip b{font-size:22px}.chip{min-width:60px}}
+
+.sun{transform-origin:790px 85px;animation:pulse 3s ease-in-out infinite}
+.rays{transform-origin:790px 85px;animation:spin 24s linear infinite}
+.cloud{animation:drift 16s ease-in-out infinite alternate}.cloud.c2{animation-duration:24s;animation-direction:alternate-reverse}
+.sway{transform-origin:628px 335px;animation:sway 4s ease-in-out infinite}
+.bird{animation:hop 2.4s ease-in-out infinite}
+.wing{transform-origin:495px 166px;animation:flap .5s ease-in-out infinite alternate}
+.fly1{animation:fly 9s ease-in-out infinite}
+.bwl,.bwr{transform-box:fill-box;animation:flut .22s ease-in-out infinite alternate}
+.bwl{transform-origin:right center}.bwr{transform-origin:left center}
+.beeo{animation:bee 6s ease-in-out infinite}
+.bw{transform-box:fill-box;transform-origin:center bottom;animation:buzz .07s linear infinite alternate}
+.fsway{transform-origin:595px 505px;animation:sway2 3.2s ease-in-out infinite}
+.psway{transform-origin:790px 466px;animation:sway2 2.6s ease-in-out infinite}
+.water path{stroke-dasharray:5 7;animation:flow .5s linear infinite}
+.drop,.drop2{animation:fall 1.2s ease-in infinite}.drop2{animation-duration:.9s}
+.rip{transform-box:fill-box;transform-origin:center;animation:rip 2.6s ease-out infinite}
+.bob{animation:hop 3s ease-in-out infinite}
+.fish{transform-box:fill-box;transform-origin:center;animation:swim 9s ease-in-out infinite}
+.tilt{transform-origin:330px 490px;animation:pour 4s ease-in-out infinite}
+.swing{transform-origin:62px 236px;animation:swg 2.8s ease-in-out infinite}.swing.s2{transform-origin:178px 236px;animation-delay:-1.2s}
+.petal{transform-box:fill-box;transform-origin:center;animation:petal 12s linear infinite}
+.zone{transform-box:fill-box;transform-origin:center}
+.zone:not(.done) .ring{animation:march 1.6s linear infinite}
+.zone.done{animation:pop .5s ease-out}
+.burst{fill:none;stroke:#2f7d6b;stroke-width:4;transform-box:fill-box;transform-origin:center;pointer-events:none;animation:burst .7s ease-out forwards}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{50%{transform:scale(1.07)}}
+@keyframes drift{to{transform:translateX(80px)}}
+@keyframes sway{50%{transform:rotate(1.8deg)}0%,100%{transform:rotate(-1.8deg)}}
+@keyframes sway2{50%{transform:rotate(3deg)}0%,100%{transform:rotate(-3deg)}}
+@keyframes hop{50%{transform:translate(-10px,-8px)}}
+@keyframes flap{to{transform:rotate(-35deg)}}
+@keyframes fly{25%{transform:translate(45px,-32px)}50%{transform:translate(95px,8px)}75%{transform:translate(40px,38px)}}
+@keyframes flut{to{transform:scaleX(.3)}}
+@keyframes bee{25%{transform:translate(35px,-18px)}50%{transform:translate(70px,0)}75%{transform:translate(35px,18px)}}
+@keyframes buzz{to{transform:scaleY(.25)}}
+@keyframes flow{to{stroke-dashoffset:-12}}
+@keyframes fall{0%{transform:translateY(0);opacity:1}100%{transform:translateY(34px);opacity:0}}
+@keyframes rip{0%{transform:scale(.3);opacity:1}100%{transform:scale(2.2);opacity:0}}
+@keyframes swim{0%{transform:translateX(0) scaleX(1)}49%{transform:translateX(120px) scaleX(1)}51%{transform:translateX(120px) scaleX(-1)}99%{transform:translateX(0) scaleX(-1)}100%{transform:translateX(0) scaleX(1)}}
+@keyframes pour{0%,20%{transform:rotate(0)}50%,75%{transform:rotate(14deg)}}
+@keyframes swg{50%{transform:rotate(8deg)}0%,100%{transform:rotate(-8deg)}}
+@keyframes petal{0%{transform:translate(0,-10px) rotate(0)}100%{transform:translate(70px,570px) rotate(540deg)}}
+@keyframes march{to{stroke-dashoffset:-22}}
+@keyframes pop{40%{transform:scale(1.25)}}
+@keyframes burst{to{transform:scale(2.4);opacity:0}}
+body.calm svg *{animation:none!important}
+@media(prefers-reduced-motion:reduce){svg *{animation:none!important}}
+</style>
+</head>
+<body>
+<header>
+  <div class="seal cn">园</div>
+  <div><h1>คำศัพท์ในสวนดอกไม้ 花园词汇</h1>
+  <p>ม.6 · สังเกตภาพสวน แล้วลากคำศัพท์จีนไปวางในวง “?” ให้ตรงกับสิ่งนั้น</p></div>
+  <div class="stats"><span>ถูก <b id="sOk">0</b>/12</span><span>พลาด <b id="sNo">0</b></span></div>
+</header>
+<main>
+<svg id="scene" viewBox="0 0 900 560" role="img" aria-label="ภาพสวนดอกไม้ มีศาลา น้ำพุ ม้านั่ง ต้นไม้ บ่อน้ำ และสิ่งอื่นๆ ให้จับคู่กับคำศัพท์จีน">
+  <circle class="sun" cx="790" cy="85" r="34" fill="#f3b63f"/>
+  <g class="rays" stroke="#f3b63f" stroke-width="4" stroke-linecap="round"><path d="M790 30v-14M790 154v14M735 85h-14M845 85h14M751 46l-10-10M829 124l10 10M829 46l10-10M751 124l-10 10"/></g>
+  <g class="cloud" fill="#fff" opacity=".9"><ellipse cx="320" cy="70" rx="60" ry="22"/><circle cx="295" cy="60" r="22"/><circle cx="340" cy="54" r="26"/></g>
+  <g class="cloud c2" fill="#fff" opacity=".8"><ellipse cx="560" cy="45" rx="40" ry="14"/><circle cx="545" cy="38" r="14"/><circle cx="578" cy="36" r="16"/></g>
+  <path d="M0 330Q150 250 300 320T600 300T900 320V340H0Z" fill="#a9d3a0"/>
+  <rect y="330" width="900" height="230" fill="#86bd6f"/>
+  <path d="M400 560Q420 470 470 430T520 340" stroke="#e2cfa0" stroke-width="46" fill="none" stroke-linecap="round"/>
+  <g stroke="#5fa04b" stroke-width="3" stroke-linecap="round"><path d="M30 400l-4-14M36 400l4-14M860 360l-4-14M866 360l4-14M720 520l-4-14M726 520l4-14M240 540l-4-14M246 540l4-14"/></g>
+  <!-- pavilion -->
+  <rect x="55" y="238" width="10" height="100" fill="#7a2f22"/><rect x="175" y="238" width="10" height="100" fill="#7a2f22"/><rect x="45" y="232" width="150" height="10" fill="#7a2f22"/><path d="M30 232l90-48 90 48z" fill="#b3302a"/><path d="M30 232q-6 8-14 4M210 232q6 8 14 4" stroke="#b3302a" stroke-width="4" fill="none"/>
+  <!-- fountain -->
+  <ellipse cx="270" cy="385" rx="60" ry="16" fill="#9aa5a8"/><ellipse cx="270" cy="380" rx="50" ry="11" fill="#6fb6e0"/><rect x="264" y="345" width="12" height="36" fill="#9aa5a8"/><ellipse cx="270" cy="345" rx="22" ry="6" fill="#9aa5a8"/>
+  <g class="water" stroke="#4f9fd6" stroke-width="3" fill="none" stroke-linecap="round"><path d="M270 340q-30-40-40 12M270 340q30-40 40 12M270 338V318"/></g><g fill="#6fb6e0"><circle class="drop" cx="238" cy="350" r="3"/><circle class="drop" style="animation-delay:.5s" cx="302" cy="350" r="3"/><circle class="drop" style="animation-delay:.9s" cx="270" cy="322" r="3"/></g><ellipse class="rip" cx="270" cy="381" rx="12" ry="3.5" fill="none" stroke="#fff" stroke-width="2"/><ellipse class="rip" style="animation-delay:1s" cx="270" cy="381" rx="12" ry="3.5" fill="none" stroke="#fff" stroke-width="2"/>
+  <!-- bench -->
+  <rect x="372" y="325" width="96" height="9" rx="2" fill="#8a5a2c"/><rect x="372" y="305" width="96" height="9" rx="2" fill="#8a5a2c"/><path d="M380 334v26M460 334v26M380 305v20M460 305v20" stroke="#5a3a1c" stroke-width="5"/>
+  <!-- tree -->
+  <rect x="616" y="205" width="24" height="130" fill="#7a5632"/><g class="sway"><path d="M616 250l-40-30" stroke="#7a5632" stroke-width="8"/><circle cx="628" cy="170" r="58" fill="#3f8a4a"/><circle cx="582" cy="200" r="36" fill="#4a9b55"/><circle cx="676" cy="200" r="36" fill="#4a9b55"/></g>
+  <!-- bird -->
+  <g class="bird"><ellipse cx="500" cy="170" rx="17" ry="11" fill="#8b6bb0"/><circle cx="515" cy="162" r="8" fill="#8b6bb0"/><path d="M522 161l10 3-10 3z" fill="#f3b63f"/><circle cx="517" cy="160" r="1.8" fill="#222"/><path class="wing" d="M495 166q-14-24-30-16q14 4 22 20z" fill="#6d4f93"/><path d="M485 172l-18 8" stroke="#6d4f93" stroke-width="4"/></g>
+  <!-- butterfly -->
+  <g class="fly1"><g transform="translate(640 345)"><ellipse class="bwl" cx="-12" cy="-6" rx="13" ry="10" fill="#f08a2e"/><ellipse class="bwr" cx="12" cy="-6" rx="13" ry="10" fill="#f08a2e"/><ellipse class="bwl" cx="-9" cy="8" rx="9" ry="7" fill="#e45a7a"/><ellipse class="bwr" cx="9" cy="8" rx="9" ry="7" fill="#e45a7a"/><rect x="-2" y="-12" width="4" height="26" rx="2" fill="#2d2d2d"/><path d="M-2 -12q-6-10-10-9M2 -12q6-10 10-9" stroke="#2d2d2d" fill="none"/></g></g>
+  <!-- bee -->
+  <g class="beeo"><g transform="translate(480 425)"><ellipse cx="0" cy="0" rx="17" ry="11" fill="#f5c22b"/><path d="M-4 -10v20M5 -10v20" stroke="#222" stroke-width="5"/><ellipse class="bw" cx="-4" cy="-14" rx="9" ry="6" fill="#fff" opacity=".8"/><ellipse class="bw" cx="6" cy="-14" rx="9" ry="6" fill="#fff" opacity=".8"/><circle cx="-14" cy="-2" r="2" fill="#222"/></g></g>
+  <!-- flowers -->
+  <g class="fsway"><g stroke="#2f7d4a" stroke-width="4"><path d="M560 500V460M595 505V470M628 500V468"/></g>
+  <g fill="#f08fb4"><circle cx="560" cy="445" r="11"/><circle cx="578" cy="455" r="11"/><circle cx="560" cy="470" r="11"/><circle cx="542" cy="455" r="11"/></g><circle cx="560" cy="456" r="8" fill="#f5d142"/>
+  <g fill="#e4473f"><circle cx="595" cy="455" r="10"/><circle cx="612" cy="465" r="10"/><circle cx="595" cy="482" r="10"/><circle cx="578" cy="468" r="10"/></g><circle cx="595" cy="468" r="7" fill="#f5d142"/>
+  <g fill="#f5d142"><circle cx="628" cy="452" r="10"/><circle cx="645" cy="462" r="10"/><circle cx="628" cy="478" r="10"/><circle cx="611" cy="464" r="10"/></g><circle cx="628" cy="465" r="7" fill="#c9732b"/></g>
+  <!-- pond -->
+  <ellipse cx="130" cy="495" rx="108" ry="36" fill="#4f93c9"/><ellipse cx="130" cy="495" rx="108" ry="36" fill="none" stroke="#8c9a9d" stroke-width="6"/><g class="bob"><g fill="#3f9a5a"><ellipse cx="95" cy="498" rx="16" ry="6"/><ellipse cx="165" cy="490" rx="14" ry="5"/></g><circle cx="165" cy="486" r="5" fill="#f7b6d2"/></g><ellipse class="rip" cx="140" cy="505" rx="16" ry="5" fill="none" stroke="#d6eefb" stroke-width="2"/><ellipse class="rip" style="animation-delay:1.4s" cx="90" cy="480" rx="16" ry="5" fill="none" stroke="#d6eefb" stroke-width="2"/><g class="fish"><ellipse cx="70" cy="508" rx="14" ry="7" fill="#e8772e"/><path d="M56 508l-10-7v14z" fill="#e8772e"/><circle cx="78" cy="506" r="1.8" fill="#222"/></g>
+  <!-- watering can -->
+  <g class="tilt"><g transform="translate(330 490)"><rect x="-22" y="-20" width="44" height="34" rx="5" fill="#5b8fb0"/><path d="M22 -6l26-20" stroke="#5b8fb0" stroke-width="7" stroke-linecap="round"/><path d="M-22 -10q-24 0-14 18" stroke="#5b8fb0" stroke-width="6" fill="none"/><path d="M48 -26l6-6" stroke="#3f6d8a" stroke-width="6"/></g></g><g fill="#6fb6e0"><circle class="drop2" cx="386" cy="460" r="3"/><circle class="drop2" style="animation-delay:.3s" cx="390" cy="462" r="3"/><circle class="drop2" style="animation-delay:.6s" cx="383" cy="462" r="2.5"/></g>
+  <!-- pot -->
+  <path d="M762 475h56l-9 45h-38z" fill="#c9693a"/><rect x="758" y="466" width="64" height="12" rx="3" fill="#b45a2e"/><g class="psway"><path d="M790 466V430" stroke="#2f7d4a" stroke-width="4"/><g fill="#4a9b55"><ellipse cx="775" cy="440" rx="14" ry="7" transform="rotate(-30 775 440)"/><ellipse cx="806" cy="436" rx="14" ry="7" transform="rotate(30 806 436)"/></g><circle cx="790" cy="426" r="8" fill="#9b6bd6"/></g>
+  <g class="swing"><path d="M62 236v14" stroke="#333" stroke-width="2"/><ellipse cx="62" cy="262" rx="11" ry="13" fill="#d6372f"/><path d="M62 249v26" stroke="#f3b63f" stroke-width="2"/></g>
+  <g class="swing s2"><path d="M178 236v14" stroke="#333" stroke-width="2"/><ellipse cx="178" cy="262" rx="11" ry="13" fill="#d6372f"/><path d="M178 249v26" stroke="#f3b63f" stroke-width="2"/></g>
+  <g fill="#f6a9c6"><ellipse class="petal" cx="210" cy="0" rx="5" ry="3" style="animation-duration:11s"/><ellipse class="petal" cx="430" cy="0" rx="5" ry="3" style="animation-duration:13s;animation-delay:-5s"/><ellipse class="petal" cx="560" cy="0" rx="5" ry="3" style="animation-duration:10s;animation-delay:-8s"/><ellipse class="petal" cx="720" cy="0" rx="5" ry="3" style="animation-duration:12s;animation-delay:-2s"/><ellipse class="petal" cx="850" cy="0" rx="5" ry="3" style="animation-duration:14s;animation-delay:-9s"/><ellipse class="petal" cx="40" cy="0" rx="5" ry="3" style="animation-duration:12s;animation-delay:-6s"/></g>
+  <g id="zones"></g>
+</svg>
+
+<div class="tray">
+  <h2>เลือกคำศัพท์แล้วลากไปวางในภาพ (มีคำหลอก 2 คำที่ไม่ได้อยู่ในสวนนี้)</h2>
+  <div id="chips"></div>
+  <div class="bar">
+    <div id="msg">เริ่มได้เลย: ดูรูปร่าง ตำแหน่ง และหน้าที่ของสิ่งต่างๆ ในสวน แล้วเลือกคำที่ตรงที่สุด</div>
+    <button class="alt" id="bPy">พินอิน</button>
+    <button class="alt" id="bTh">คำแปลไทย</button>
+    <button class="alt" id="bCalm">หยุดการเคลื่อนไหว</button>
+    <button id="bReset">เริ่มใหม่</button>
+  </div>
+</div>
+<div id="log" aria-live="polite"></div>
+</main>
+<div id="end"><div><h2 id="eT"></h2><p id="eP"></p><button onclick="init()">เล่นอีกครั้ง</button></div></div>
+
+<script>
+const D=[
+{c:"花",p:"huā",t:"ดอกไม้",n:"ลักษณะนามที่ใช้บ่อย: 一朵花 (ดอกหนึ่ง) · 艹 บอกว่าเป็นพืช",x:590,y:405},
+{c:"太阳",p:"tàiyáng",t:"ดวงอาทิตย์",n:"ลักษณะนาม: 一轮太阳 · 阳 มีเสียงบอกว่า 日 เกี่ยวกับแสง",x:700,y:90},
+{c:"凉亭",p:"liángtíng",t:"ศาลา",n:"凉 = เย็นสบาย + 亭 = ศาลาริมทาง รวมกันคือศาลาพักร้อน",x:120,y:140},
+{c:"小鸟",p:"xiǎoniǎo",t:"นกตัวเล็ก",n:"小 + 鸟 = นกเล็ก · ลักษณะนาม: 一只小鸟",x:520,y:108},
+{c:"树",p:"shù",t:"ต้นไม้",n:"ลักษณะนามเฉพาะ: 一棵树 · 木 บอกว่าเป็นไม้",x:710,y:185},
+{c:"长椅",p:"chángyǐ",t:"ม้านั่งยาว",n:"长 = ยาว + 椅 (木旁) = เก้าอี้ · ลักษณะนาม: 一把长椅",x:420,y:268},
+{c:"喷泉",p:"pēnquán",t:"น้ำพุ",n:"喷 = พ่น + 泉 = น้ำพุ/ลำธารต้นน้ำ · 泉 มีน้ำ (水) อยู่ข้างล่าง",x:270,y:292},
+{c:"蝴蝶",p:"húdié",t:"ผีเสื้อ",n:"ทั้งสองตัวมี 虫旁 บอกว่าเป็นแมลงตัวเล็ก",x:640,y:298},
+{c:"蜜蜂",p:"mìfēng",t:"ผึ้ง",n:"蜜 = น้ำผึ้ง + 蜂 (虫旁) = แมลงที่ทำน้ำผึ้ง",x:480,y:372},
+{c:"池塘",p:"chítáng",t:"บ่อน้ำ",n:"池 มี 氵 บอกว่าเกี่ยวกับน้ำ · 塘 มี 土 บอกว่าเป็นพื้นที่ขุดดิน",x:130,y:432},
+{c:"浇水壶",p:"jiāoshuǐhú",t:"กาน้ำรดต้นไม้",n:"浇水 = รดน้ำ + 壶 = กา/ภาชนะ รวมเป็นกาที่ใช้รดน้ำ",x:330,y:432},
+{c:"花盆",p:"huāpén",t:"กระถางต้นไม้",n:"花 = ดอกไม้ + 盆 = กะละมัง/ภาชนะ รวมเป็นที่ปลูกดอกไม้",x:790,y:410}
+];
+const X=[{c:"汽车",p:"qìchē",t:"รถยนต์"},{c:"雪人",p:"xuěrén",t:"ตุ๊กตาหิมะ"}];
+const $=s=>document.querySelector(s),NS="http://www.w3.org/2000/svg";
+let ok,no;
+function say(t,k){const m=$("#msg");m.textContent=t;m.className=k||""}
+function tx(p,x,y,s,f,t,w){const e=document.createElementNS(NS,"text");e.setAttribute("x",x);e.setAttribute("y",y);e.setAttribute("text-anchor","middle");e.setAttribute("font-size",s);e.setAttribute("fill",f);e.setAttribute("class","cn");if(w)e.setAttribute("font-weight",w);e.textContent=t;p.appendChild(e)}
+function init(){
+  ok=0;no=0;$("#sOk").textContent=0;$("#sNo").textContent=0;$("#log").innerHTML="";$("#end").classList.remove("show");
+  say("เริ่มได้เลย: ดูรูปร่าง ตำแหน่ง และหน้าที่ของสิ่งต่างๆ ในสวน แล้วเลือกคำที่ตรงที่สุด");
+  const z=$("#zones");z.innerHTML="";
+  D.forEach(d=>{
+    const g=document.createElementNS(NS,"g");g.setAttribute("class","zone");g.dataset.z=d.c;
+    g.innerHTML=`<circle class="ring" cx="${d.x}" cy="${d.y}" r="38"/><circle cx="${d.x}" cy="${d.y}" r="58" fill="transparent"/><text class="q" x="${d.x}" y="${d.y+9}">?</text>`;
+    z.appendChild(g);
+  });
+  const all=[...D,...X].sort(()=>Math.random()-.5),c=$("#chips");c.innerHTML="";
+  all.forEach(d=>{
+    const e=document.createElement("div");e.className="chip cn";e.dataset.c=d.c;
+    e.innerHTML=`<b>${d.c}</b><small class="p">${d.p}</small><small class="t">${d.t}</small>`;
+    e.addEventListener("pointerdown",ev=>drag(ev,e));c.appendChild(e);
+  });
+}
+function drag(ev,el){
+  ev.preventDefault();
+  const g=el.cloneNode(true);g.classList.add("ghost");document.body.appendChild(g);
+  const find=e=>{const t=document.elementFromPoint(e.clientX,e.clientY);return t&&t.closest&&t.closest(".zone:not(.done)")};
+  const mv=e=>{g.style.left=e.clientX+"px";g.style.top=e.clientY+"px";
+    document.querySelectorAll(".zone.over").forEach(z=>z.classList.remove("over"));const zn=find(e);if(zn)zn.classList.add("over")};
+  mv(ev);el.style.opacity=.3;
+  const up=e=>{
+    removeEventListener("pointermove",mv);removeEventListener("pointerup",up);removeEventListener("pointercancel",up);
+    g.remove();el.style.opacity="";
+    document.querySelectorAll(".zone.over").forEach(z=>z.classList.remove("over"));
+    const zn=find(e);if(zn)drop(el,zn)};
+  addEventListener("pointermove",mv);addEventListener("pointerup",up);addEventListener("pointercancel",up);
+}
+function drop(el,zn){
+  const c=el.dataset.c,d=D.find(x=>x.c===c);
+  if(zn.dataset.z===c){
+    ok++;$("#sOk").textContent=ok;el.classList.add("used");zn.classList.add("done");
+    zn.querySelector(".q").remove();
+    tx(zn,d.x,d.y+(c.length>2?2:3),c.length>2?19:c.length>1?24:30,"#1f2a2b",c,600);
+    tx(zn,d.x,d.y+20,11,"#b3302a",d.p);
+    {const b=document.createElementNS(NS,"circle");b.setAttribute("class","burst");b.setAttribute("cx",d.x);b.setAttribute("cy",d.y);b.setAttribute("r",38);zn.appendChild(b);setTimeout(()=>b.remove(),800)}
+    say(`ถูกต้อง! ${c} (${d.p}) = ${d.t}`,"ok");
+    const n=document.createElement("div");n.className="note";n.innerHTML=`<b class="cn">${c}</b>${d.p} · ${d.t}<em>${d.n}</em>`;$("#log").appendChild(n);
+    if(ok===D.length)finish();
+  }else{
+    no++;$("#sNo").textContent=no;zn.classList.add("shake");setTimeout(()=>zn.classList.remove("shake"),400);
+    say(d?`ยังไม่ใช่ ลองดูรูปร่าง ตำแหน่ง และหน้าที่ของสิ่งนี้ให้ละเอียดขึ้น แล้วเลือกคำใหม่`:`${c} ไม่ใช่สิ่งที่พบในสวนดอกไม้ในภาพนี้ ลองเลือกคำอื่น`,"no");
+  }
+}
+function finish(){
+  const acc=Math.round(ok/(ok+no)*100);
+  $("#eT").textContent=acc>=90?"ยอดเยี่ยม! 太棒了":acc>=70?"เก่งมาก! 很好":"สำเร็จแล้ว! 加油";
+  $("#eP").textContent=`จับคู่ครบ 12 คำ พลาด ${no} ครั้ง · ความแม่นยำ ${acc}%`;
+  setTimeout(()=>$("#end").classList.add("show"),700);
+}
+$("#bReset").onclick=init;
+$("#bCalm").onclick=e=>{document.body.classList.toggle("calm");e.target.textContent=document.body.classList.contains("calm")?"เปิดการเคลื่อนไหว":"หยุดการเคลื่อนไหว"};
+$("#bPy").onclick=()=>document.body.classList.toggle("py");
+$("#bTh").onclick=()=>document.body.classList.toggle("th");
+init();
+</script>
+</body>
+</html>
